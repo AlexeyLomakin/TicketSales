@@ -1,0 +1,52 @@
+package com.presentation.ui
+
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.domain.OffersDomainEntity
+import com.presentation.R
+import com.presentation.databinding.ItemOfferBinding
+
+class OffersAdapter : ListAdapter<OffersDomainEntity, OffersAdapter.OffersViewHolder>(diffUtil) {
+
+    private val imageResIds = mapOf(
+        1 to R.drawable.offer_id1,
+        2 to R.drawable.offer_id2,
+        3 to R.drawable.offer_id3
+    )
+
+    class OffersViewHolder(private val binding: ItemOfferBinding) : ViewHolder(binding.root) {
+
+        fun bind(offers: OffersDomainEntity, imageResId: Int) {
+            binding.title.text = offers.title
+            binding.town.text = offers.town
+            binding.price.text = "от ${offers.price} ₽"
+            binding.image.setImageResource(imageResId)
+        }
+    }
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OffersViewHolder {
+        val binding = ItemOfferBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return OffersViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: OffersViewHolder, position: Int) {
+        val offer = getItem(position)
+        val imageResId = imageResIds[offer.id] ?: R.drawable.ic_launcher_background // Placeholder изображение, если id не найден
+        holder.bind(offer, imageResId)
+    }
+
+    companion object {
+        val diffUtil = object : DiffUtil.ItemCallback<OffersDomainEntity>() {
+            override fun areItemsTheSame(oldItem: OffersDomainEntity, newItem: OffersDomainEntity): Boolean =
+                oldItem.id == newItem.id
+
+            override fun areContentsTheSame(oldItem: OffersDomainEntity, newItem: OffersDomainEntity): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
+}

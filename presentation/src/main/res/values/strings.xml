@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Air Tickets</string>
+    <string name="navigation_tickets">Авиабилеты</string>
+    <string name="navigation_hotels">Отели</string>
+    <string name="navigation_other">Короче</string>
+    <string name="navigation_subscriptions">Подписки</string>
+    <string name="navigation_profile">Профиль</string>
+    <string name="search_cheap">Поиск дешевых\nавиабилетов</string>
+    <string name="recommendations_title">Музыкально отлететь</string>
+    <string name="departure_hint">Откуда - Москва</string>
+    <string name="arrival_hint">Куда - Турция</string>
+</resources>

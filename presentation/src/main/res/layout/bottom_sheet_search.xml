@@ -1,0 +1,332 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/search_card_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="8dp"
+        android:backgroundTint="#2F3035"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="8dp"
+            android:backgroundTint="#3E3F43">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/departure"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/departure_hint"
+                    android:inputType="text"
+                    android:layout_marginStart="40dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="#9F9F9F"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/divider_view"/>
+
+                <ImageView
+                    android:id="@+id/search_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/search_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <View
+                    android:id="@+id/divider_view"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:background="#5E5F61"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintEnd_toEndOf="@+id/departure"
+                    app:layout_constraintStart_toStartOf="@+id/departure"
+                    app:layout_constraintTop_toBottomOf="@+id/departure"
+                    app:layout_constraintBottom_toTopOf="@+id/arrival" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/arrival"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:inputType="text"
+                    android:layout_marginTop="5dp"
+                    android:hint="@string/arrival_hint"
+                    android:textColorHint="#9F9F9F"
+                    android:textColor="@color/white"
+                    app:layout_constraintTop_toBottomOf="@id/divider_view"
+                    app:layout_constraintStart_toStartOf="@id/divider_view"
+                    app:layout_constraintEnd_toEndOf="@id/divider_view"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <ImageButton
+        android:id="@+id/difficult_route_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/roundcorner"
+        android:backgroundTint="@color/dark_green"
+        android:clickable="true"
+        android:focusable="true"
+        android:scaleType="center"
+        android:src="@drawable/difficult_route"
+        app:layout_constraintStart_toStartOf="@+id/search_card_container"
+        app:layout_constraintTop_toBottomOf="@+id/search_card_container" />
+
+    <TextView
+        android:id="@+id/tv_difficult_route"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Сложный\nмаршрут"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/difficult_route_button"
+        app:layout_constraintStart_toStartOf="@+id/difficult_route_button"
+        app:layout_constraintEnd_toEndOf="@+id/difficult_route_button"
+        android:layout_marginTop="4dp"/>
+
+    <ImageButton
+        android:id="@+id/anywhere_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/blue"
+        android:background="@drawable/roundcorner"
+        android:clickable="true"
+        android:focusable="true"
+        android:scaleType="center"
+        android:src="@drawable/anywhere"
+        app:layout_constraintStart_toEndOf="@id/difficult_route_button"
+        app:layout_constraintTop_toBottomOf="@+id/search_card_container"
+        app:cardCornerRadius="12dp"/>
+
+    <TextView
+        android:id="@+id/tv_anywhere"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Куда угодно"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/anywhere_button"
+        app:layout_constraintStart_toStartOf="@+id/anywhere_button"
+        app:layout_constraintEnd_toEndOf="@+id/anywhere_button"
+        android:layout_marginTop="4dp"/>
+
+    <ImageButton
+        android:id="@+id/weekends_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/dark_blue"
+        android:background="@drawable/roundcorner"
+        android:clickable="true"
+        android:focusable="true"
+        android:scaleType="center"
+        android:src="@drawable/weekends"
+        app:layout_constraintStart_toEndOf="@id/anywhere_button"
+        app:layout_constraintTop_toBottomOf="@+id/search_card_container"
+        app:cardCornerRadius="12dp"/>
+
+    <TextView
+        android:id="@+id/tv_weekends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Выходные"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/weekends_button"
+        app:layout_constraintStart_toStartOf="@+id/weekends_button"
+        app:layout_constraintEnd_toEndOf="@+id/weekends_button"
+        android:layout_marginTop="4dp"/>
+
+    <ImageButton
+        android:id="@+id/hot_tickets_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/red"
+        android:background="@drawable/roundcorner"
+        android:clickable="true"
+        android:focusable="true"
+        android:scaleType="center"
+        android:src="@drawable/hot_tickets"
+        app:layout_constraintStart_toEndOf="@id/weekends_button"
+        app:layout_constraintTop_toBottomOf="@+id/search_card_container"
+        app:layout_constraintEnd_toEndOf="@+id/search_card_container"
+        app:cardCornerRadius="12dp"/>
+
+    <TextView
+        android:id="@+id/tv_hot_tickets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Горячие\nбилеты"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/hot_tickets_button"
+        app:layout_constraintStart_toStartOf="@+id/hot_tickets_button"
+        app:layout_constraintEnd_toEndOf="@+id/hot_tickets_button"
+        android:layout_marginTop="4dp"/>
+
+    <TextView
+        android:id="@+id/recommendations_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Популярные направления"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/tv_hot_tickets"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/popular_destinations_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#333"
+        app:layout_constraintTop_toBottomOf="@+id/recommendations_title">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+
+            <ImageView
+                android:id="@+id/iv_istanbul"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/istanbul"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:id="@+id/tv_istanbul"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Стамбул"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintTop_toTopOf="@+id/iv_istanbul"
+                app:layout_constraintStart_toEndOf="@id/iv_istanbul"
+                app:layout_constraintBottom_toBottomOf="@id/iv_istanbul"/>
+
+            <TextView
+                android:id="@+id/tv_istanbul_subtitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Популярное направление"
+                android:textColor="@color/gray1"
+                android:textSize="14sp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toStartOf="@id/tv_istanbul"
+                app:layout_constraintTop_toBottomOf="@id/tv_istanbul"/>
+
+            <ImageView
+                android:id="@+id/iv_sochi"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/sochi"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_istanbul"
+                app:layout_constraintBottom_toTopOf="@id/iv_phuket"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:id="@+id/tv_sochi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Сочи"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="@id/tv_istanbul"
+                app:layout_constraintTop_toTopOf="@id/iv_sochi"/>
+
+            <TextView
+                android:id="@+id/tv_sochi_subtitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Популярное направление"
+                android:textColor="@color/gray1"
+                android:textSize="14sp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toStartOf="@id/tv_istanbul"
+                app:layout_constraintTop_toBottomOf="@id/tv_sochi"
+                app:layout_constraintBottom_toBottomOf="@id/iv_sochi"/>
+
+            <ImageView
+                android:id="@+id/iv_phuket"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/phuket"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_sochi"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:id="@+id/tv_phuket"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Пхукет"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@id/tv_istanbul"
+                app:layout_constraintTop_toTopOf="@id/iv_phuket"/>
+
+            <TextView
+                android:id="@+id/tv_phuket_subtitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Популярное направление"
+                android:textColor="@color/gray1"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="@id/tv_istanbul"
+                app:layout_constraintTop_toBottomOf="@id/tv_phuket"
+                app:layout_constraintBottom_toBottomOf="@id/iv_phuket"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
