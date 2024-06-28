@@ -77,12 +77,12 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
-    <TextView
-        android:id="@+id/tv_departure_date"
+    <Button
+        android:id="@+id/departure_date_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="24 фев, сб"
-        android:textColor="@color/white"
+        android:textColor="@color/gray1"
         android:textSize="16sp"
         android:padding="8dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -100,8 +100,8 @@
         android:textColor="@color/white"
         android:textSize="16sp"
         android:padding="8dp"
-        app:layout_constraintStart_toEndOf="@id/tv_departure_date"
-        app:layout_constraintTop_toTopOf="@id/tv_departure_date"
+        app:layout_constraintStart_toEndOf="@id/departure_date_btn"
+        app:layout_constraintTop_toTopOf="@id/departure_date_btn"
         android:layout_marginStart="8dp"
         android:clickable="true"
         android:focusable="true"/>
@@ -115,7 +115,7 @@
         android:textSize="16sp"
         android:padding="8dp"
         app:layout_constraintStart_toEndOf="@id/tv_return_date"
-        app:layout_constraintTop_toTopOf="@id/tv_departure_date"
+        app:layout_constraintTop_toTopOf="@id/departure_date_btn"
         android:layout_marginStart="8dp"
         android:clickable="true"
         android:focusable="true"/>
@@ -126,7 +126,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         app:layout_constraintStart_toEndOf="@id/tv_passengers"
-        app:layout_constraintTop_toTopOf="@id/tv_departure_date"
+        app:layout_constraintTop_toTopOf="@id/departure_date_btn"
         android:layout_marginStart="8dp"
         android:clickable="true"
         android:focusable="true"/>
@@ -136,7 +136,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/tv_departure_date"
+        app:layout_constraintTop_toBottomOf="@id/departure_date_btn"
         android:layout_marginTop="16dp"
         android:padding="16dp">
 
