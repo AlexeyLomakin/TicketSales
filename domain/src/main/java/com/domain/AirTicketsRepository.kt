@@ -5,7 +5,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface AirTicketsRepository {
 
-    suspend fun getAllTickets(): Flow<List<TicketsDomainEntity>>
+    fun getAllTickets(): Flow<List<TicketsDomainEntity>>
 
-    suspend fun getAllOffers(): Flow<List<OffersDomainEntity>>
+    fun getAllOffers(): Flow<List<OffersDomainEntity>>
+
+    fun getAllTicketsOffers(): Flow<List<TicketsDomainEntity>>
 }

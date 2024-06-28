@@ -12,12 +12,12 @@ class AirTicketsRepositoryImpl @Inject constructor(
     private val ticketsService: TicketsService,
     private val offersResponseMapper: Mapper<OffersResponse.Offer, OffersDomainEntity>
 ): AirTicketsRepository {
-    override suspend fun getAllTickets(): Flow<List<TicketsDomainEntity>> {
+    override fun getAllTickets(): Flow<List<TicketsDomainEntity>> {
         TODO("Not yet implemented")
     }
-//    override fun getAllTickets(): Flow<List<TicketsDomainEntity>> {
-//        TODO("Not yet implemented")
-//    }
+    override fun getAllTicketsOffers(): Flow<List<TicketsDomainEntity>> {
+        TODO("Not yet implemented")
+    }
 
     override fun getAllOffers(): Flow<List<OffersDomainEntity>> = flow {
         val response: Response<OffersResponse> = ticketsService.getAllOffers()
