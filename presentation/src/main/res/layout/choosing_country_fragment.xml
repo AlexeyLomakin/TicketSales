@@ -7,16 +7,6 @@
     android:background="#0C0C0C"
     tools:context=".ui.MainActivity">
 
-    <ImageButton
-        android:id="@+id/btn_swap"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@drawable/airplane_blue"
-        app:layout_constraintEnd_toEndOf="@+id/card_search"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@android:color/transparent"
-        android:layout_margin="16dp"/>
-
     <androidx.cardview.widget.CardView
         android:id="@+id/card_search"
         android:layout_width="match_parent"
@@ -33,6 +23,26 @@
             android:layout_height="wrap_content"
             android:padding="8dp">
 
+            <ImageButton
+                android:id="@+id/btn_swap"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/swap_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/departure"
+                android:background="@android:color/transparent"
+                app:layout_constraintBottom_toBottomOf="@+id/departure"
+                android:layout_margin="16dp"/>
+
+        <ImageButton
+            android:id="@+id/back_btn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/back_button"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+            
             <TextView
                 android:id="@+id/departure"
                 android:layout_width="0dp"
@@ -42,10 +52,11 @@
                 android:textColor="@color/white"
                 android:textColorHint="#9F9F9F"
                 android:drawablePadding="10dp"
+                android:layout_marginStart="10dp"
                 android:background="@android:color/transparent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/back_btn"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_swap"
                 app:layout_constraintBottom_toTopOf="@id/divider_view"/>
 
             <View
@@ -54,7 +65,8 @@
                 android:layout_height="2dp"
                 android:background="#5E5F61"
                 android:layout_marginTop="5dp"
-                app:layout_constraintEnd_toEndOf="@+id/departure"
+                android:layout_marginEnd="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/departure"
                 app:layout_constraintTop_toBottomOf="@+id/departure"
                 app:layout_constraintBottom_toTopOf="@+id/arrival" />
@@ -77,14 +89,16 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
+
     <Button
-        android:id="@+id/departure_date_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="24 фев, сб"
-        android:textColor="@color/gray1"
-        android:textSize="16sp"
-        android:padding="8dp"
+        android:id="@+id/return_date_btn"
+        android:layout_width="89dp"
+        android:layout_height="33dp"
+        android:backgroundTint="#2F3035"
+        android:background="@drawable/roundcorner"
+        android:text="+ обратно"
+        android:textColor="@color/white"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/card_search"
         android:layout_marginTop="16dp"
@@ -92,102 +106,111 @@
         android:clickable="true"
         android:focusable="true"/>
 
-    <TextView
-        android:id="@+id/tv_return_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="обратно"
+    <Button
+        android:id="@+id/departure_date_btn"
+        android:layout_width="89dp"
+        android:layout_height="33dp"
+        android:backgroundTint="#2F3035"
+        android:background="@drawable/roundcorner"
         android:textColor="@color/white"
-        android:textSize="16sp"
-        android:padding="8dp"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/return_date_btn"
+        app:layout_constraintTop_toTopOf="@id/return_date_btn"
+        android:layout_marginStart="8dp"
+        android:clickable="true"
+        android:focusable="true"/>
+
+    <Button
+        android:id="@+id/passengers_btn"
+        android:layout_width="89dp"
+        android:layout_height="33dp"
+        android:backgroundTint="#2F3035"
+        android:background="@drawable/roundcorner"
+        android:text="1,эконом"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:drawableLeft="@drawable/profile_small"
         app:layout_constraintStart_toEndOf="@id/departure_date_btn"
-        app:layout_constraintTop_toTopOf="@id/departure_date_btn"
+        app:layout_constraintTop_toTopOf="@id/return_date_btn"
         android:layout_marginStart="8dp"
         android:clickable="true"
         android:focusable="true"/>
 
-    <TextView
-        android:id="@+id/tv_passengers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="1, эконом"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:padding="8dp"
-        app:layout_constraintStart_toEndOf="@id/tv_return_date"
-        app:layout_constraintTop_toTopOf="@id/departure_date_btn"
-        android:layout_marginStart="8dp"
-        android:clickable="true"
-        android:focusable="true"/>
-
-    <ImageButton
+    <Button
         android:id="@+id/btn_filters"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        app:layout_constraintStart_toEndOf="@id/tv_passengers"
+        android:layout_width="89dp"
+        android:layout_height="33dp"
+        android:backgroundTint="#2F3035"
+        android:background="@drawable/roundcorner"
+        android:drawableLeft="@drawable/filter"
+        app:layout_constraintStart_toEndOf="@id/passengers_btn"
         app:layout_constraintTop_toTopOf="@id/departure_date_btn"
+        android:text="фильтры"
+        android:textColor="@color/white"
         android:layout_marginStart="8dp"
         android:clickable="true"
         android:focusable="true"/>
 
-    <LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/recommendations_cs"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    app:layout_constraintTop_toBottomOf="@id/departure_date_btn"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp">
+
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ticket_recommendations"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/departure_date_btn"
-        android:layout_marginTop="16dp"
-        android:padding="16dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp">
+    </androidx.recyclerview.widget.RecyclerView>
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginEnd="8dp"/>
+    <Button
+        android:id="@+id/show_all_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Показать всё"
+        android:textColor="@color/blue"
+        android:backgroundTint="#2F3035"
+        app:layout_constraintTop_toBottomOf="@+id/ticket_recommendations"
+        app:layout_constraintStart_toStartOf="@+id/recommendations_cs"
+        app:layout_constraintEnd_toEndOf="@+id/recommendations_cs" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Уральские авиалинии"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:layout_weight="1"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2 390 ₽"
-                android:textColor="@color/white"
-                android:textSize="16sp"/>
-        </LinearLayout>
-
-    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/btn_search_tickets"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Посмотреть все билеты"
         android:textColor="@color/white"
-        android:background="@color/blue"
+        android:background="@drawable/roundcorner"
+        android:backgroundTint="@color/blue"
         android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/ticket_recommendations"
+        app:layout_constraintStart_toStartOf="@+id/recommendations_cs"
+        app:layout_constraintEnd_toEndOf="@+id/recommendations_cs"
+        app:layout_constraintTop_toBottomOf="@id/recommendations_cs"
         android:layout_marginTop="16dp"/>
 
-    <androidx.appcompat.widget.SwitchCompat
+    <Switch
         android:id="@+id/switch_price_subscription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Подписка на цену"
         android:textColor="@color/white"
+        android:background="#242529"
         android:padding="16dp"
+        android:drawableLeft="@drawable/subscribe_icon"
         app:layout_constraintTop_toBottomOf="@id/btn_search_tickets"
         android:layout_marginTop="16dp"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
