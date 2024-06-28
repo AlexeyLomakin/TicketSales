@@ -9,5 +9,5 @@ interface AirTicketsRepository {
 
     fun getAllOffers(): Flow<List<OffersDomainEntity>>
 
-    fun getAllTicketsOffers(): Flow<List<TicketsDomainEntity>>
+    fun getAllTicketsOffers(): Flow<List<TicketsOffersDomainEntity>>
 }

@@ -2,6 +2,7 @@ package com.presentation.ui
 
 import android.os.Bundle
 import android.view.MotionEvent
+import android.view.MotionEvent.*
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -34,7 +35,7 @@ class OffersFragment: Fragment(R.layout.fragment_offers){
         }
 
         viewBinding.arrival.setOnTouchListener { v, event ->
-            if (event.action == MotionEvent.ACTION_UP) {
+            if (event.action == ACTION_UP) {
                 val departureText = viewBinding.departure.text.toString()
                 val bottomSheetFragment = BottomSheetFragment.newInstance(departureText)
                 bottomSheetFragment.show(

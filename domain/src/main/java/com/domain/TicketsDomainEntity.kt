@@ -3,7 +3,7 @@ package com.domain
 data class TicketsDomainEntity (
     val id: Int,
     val badge: String,
-    val price: Price,
+    val price: Int,
     val provider_name: String,
     val company: String,
     val departure: Departure,
@@ -15,7 +15,6 @@ data class TicketsDomainEntity (
     val is_returnable: Boolean,
     val is_exchangable: Boolean,
 ) {
-    data class Price(val price: Int)
     data class Departure(
         val town: String,
         val date: String,

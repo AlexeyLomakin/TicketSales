@@ -1,6 +1,5 @@
 package com.data
 
-import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import retrofit2.http.GET
 
@@ -11,8 +10,8 @@ interface TicketsService {
     suspend fun getAllOffers(): Response<OffersResponse>
 
     @GET("c0464573-5a13-45c9-89f8-717436748b69")
-    suspend fun getAllTickets(): Flow<List<Tickets>>
+    suspend fun getAllTickets(): Response<List<Tickets>>
 
     @GET("38b5205d-1a3d-4c2f-9d77-2f9d1ef01a4a")
-    suspend fun getAllTicketOffers(): Flow<List<TicketOffers>>
+    suspend fun getAllTicketOffers(): Response<List<TicketsOffers>>
 }

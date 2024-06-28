@@ -1,6 +1,6 @@
 package com.data
 
-data class TicketOffers (
+data class TicketsOffers (
     val id: Int,
     val title: String,
     val time_range: List<String>,

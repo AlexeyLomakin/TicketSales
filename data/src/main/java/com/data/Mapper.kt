@@ -2,6 +2,7 @@ package com.data
 
 import com.domain.OffersDomainEntity
 import com.domain.TicketsDomainEntity
+import com.domain.TicketsOffersDomainEntity
 import javax.inject.Inject
 
 interface Mapper<I, O> {
@@ -19,13 +20,23 @@ class OffersMapper  @Inject constructor()  : Mapper<OffersResponse.Offer, Offers
     }
 }
 
+class TicketOffersMapper   @Inject constructor()   : Mapper<TicketsOffers, TicketsOffersDomainEntity>   {
+    override fun map(input: TicketsOffers): TicketsOffersDomainEntity   {
+        return TicketsOffersDomainEntity(
+            id = input.id,
+            title = input.title,
+            time_range = input.time_range,
+            price = input.price.value
+        )
+    }
+}
 
 class TicketsMapper @Inject constructor() : Mapper<Tickets, TicketsDomainEntity> {
     override fun map(input: Tickets): TicketsDomainEntity {
         return TicketsDomainEntity(
             id = input.id,
             badge = input.badge,
-            price = TicketsDomainEntity.Price(input.price.value),
+            price = input.price.value,
             provider_name = input.provider_name,
             company = input.company,
             departure = TicketsDomainEntity.Departure(
