@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.presentation.R
 import com.presentation.databinding.ChoosingCountryFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +32,8 @@ class ChoosingCountryFragment: Fragment(R.layout.choosing_country_fragment) {
         super.onViewCreated(view, savedInstanceState)
 
         viewBinding.ticketRecommendations.layoutManager = LinearLayoutManager(requireContext())
-
+        val divider = MaterialDividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
+        viewBinding.ticketRecommendations.addItemDecoration(divider)
         viewBinding.ticketRecommendations.adapter  = adapter
         viewModel.ticketsOffersData.observe(viewLifecycleOwner){ ticketsOffersData ->
             adapter.submitList(ticketsOffersData)
