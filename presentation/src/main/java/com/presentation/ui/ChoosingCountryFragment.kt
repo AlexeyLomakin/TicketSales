@@ -122,5 +122,19 @@ class ChoosingCountryFragment: Fragment(R.layout.choosing_country_fragment) {
             )
             datePickerDialog.show()
         }
+        val bundle = Bundle().apply {
+            putString("departure", viewBinding.departure.text.toString())
+            putString("arrival", viewBinding.arrival.text.toString())
+            putString("departureDate", viewBinding.departureDateBtn.text.toString())
+        }
+
+        viewBinding.searchTicketsBtn.setOnClickListener {
+            AllTicketsFragment().apply { arguments = bundle}
+            requireActivity()
+            .supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_container_view, AllTicketsFragment())
+            .commit()
+        }
     }
 }

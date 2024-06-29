@@ -48,17 +48,19 @@ class BottomSheetFragment : BottomSheetDialogFragment(R.layout.bottom_sheet_sear
             }
 
             difficultRouteButton.setOnClickListener  {
-                requireActivity().supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.fragment_container_view, CapFragment())
-                    .commit()
+                requireActivity()
+                .supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container_view, CapFragment())
+                .commit()
             }
 
             weekendsButton.setOnClickListener  {
-                requireActivity().supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.fragment_container_view, CapFragment())
-                    .commit()
+                requireActivity()
+                .supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container_view, CapFragment())
+                .commit()
             }
 
             hotTicketsButton.setOnClickListener  {
