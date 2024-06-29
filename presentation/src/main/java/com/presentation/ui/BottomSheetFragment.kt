@@ -2,7 +2,7 @@ package com.presentation.ui
 
 import android.app.Dialog
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.text.Editable
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -40,8 +40,45 @@ class BottomSheetFragment : BottomSheetDialogFragment(R.layout.bottom_sheet_sear
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val departure = arguments?.getString(ARG_DEPARTURE) ?: ""
-        viewBinding.departure.text = departure
+        with(viewBinding) {
+            departure.text = arguments?.getString(ARG_DEPARTURE) ?: ""
+
+            anywhereButton.setOnClickListener  {
+                arrival.text = Editable.Factory.getInstance().newEditable(getString(R.string.anywhere))
+            }
+
+            difficultRouteButton.setOnClickListener  {
+                requireActivity().supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.fragment_container_view, CapFragment())
+                    .commit()
+            }
+
+            weekendsButton.setOnClickListener  {
+                requireActivity().supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.fragment_container_view, CapFragment())
+                    .commit()
+            }
+
+            hotTicketsButton.setOnClickListener  {
+                requireActivity().supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.fragment_container_view, CapFragment())
+                    .commit()
+            }
+
+            istanbulCard.setOnClickListener {
+                arrival.text = Editable.Factory.getInstance().newEditable(getString(R.string.istanbul_name))
+            }
+            sochiCard.setOnClickListener {
+                arrival.text = Editable.Factory.getInstance().newEditable(getString(R.string.sochi_name))
+            }
+            phuketCard.setOnClickListener {
+                arrival.text = Editable.Factory.getInstance().newEditable(getString(R.string.phuket_name))
+            }
+
+        }
     }
 
     companion object {

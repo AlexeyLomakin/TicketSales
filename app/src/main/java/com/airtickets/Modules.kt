@@ -4,14 +4,21 @@ import com.data.AirTicketsRepositoryImpl
 import com.data.Mapper
 import com.data.OffersResponse
 import com.data.OffersMapper
+import com.data.TicketOffersMapper
 import com.data.Tickets
 import com.data.TicketsMapper
+import com.data.TicketsOffers
 import com.data.TicketsService
 import com.domain.AirTicketsRepository
 import com.domain.GetAllOffersUseCase
 import com.domain.GetAllOffersUseCaseImpl
+import com.domain.GetAllTicketsOffersUseCase
+import com.domain.GetAllTicketsOffersUseCaseImpl
+import com.domain.GetAllTicketsUseCase
+import com.domain.GetAllTicketsUseCaseImpl
 import com.domain.OffersDomainEntity
 import com.domain.TicketsDomainEntity
+import com.domain.TicketsOffersDomainEntity
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -26,24 +33,30 @@ import javax.inject.Singleton
 abstract class Modules {
 
     @Binds
-    abstract fun bindOffersMapper(impl: OffersMapper): Mapper<OffersResponse.Offer, OffersDomainEntity>
+    abstract fun bindOffersMapper(offersMapper: OffersMapper): Mapper<OffersResponse.Offer, OffersDomainEntity>
 
     @Binds
-    abstract fun bindTicketsMapper(impl: TicketsMapper): Mapper<Tickets, TicketsDomainEntity>
+    abstract fun bindTicketsMapper(ticketsMapper: TicketsMapper): Mapper<Tickets, TicketsDomainEntity>
+
+    @Binds
+    abstract fun bindTicketsOffersMapper(ticketOffersMapper: TicketOffersMapper): Mapper<TicketsOffers, TicketsOffersDomainEntity>
+
+    @Binds
+    abstract fun bindAirTicketsOffersRepository(getAllOffers: AirTicketsRepositoryImpl): AirTicketsRepository
 
     @Binds
     abstract fun bindGetAllOffersUseCase(getAllOffers: GetAllOffersUseCaseImpl): GetAllOffersUseCase
 
     @Binds
-    abstract fun bindAirTicketsOffersRepository(getAllOffers: AirTicketsRepositoryImpl): AirTicketsRepository
+    abstract fun bindGetAllTicketsUseCase(getAllOffers: GetAllTicketsUseCaseImpl): GetAllTicketsUseCase
 
-//    @Binds
-//    abstract fun bindGetAllTicketsUseCase(getAllOffers: GetAllTicketsUseCaseImpl): GetAllTicketsUseCase
+    @Binds
+    abstract fun bindGetAllTicketsOffersUseCase(getAllTicketsOffers: GetAllTicketsOffersUseCaseImpl): GetAllTicketsOffersUseCase
 
     companion object {
         @Provides
         @Singleton
-        fun provideOffersService(): TicketsService {
+        fun provideTicketsSalesService(): TicketsService {
             val baseUrl = "https://run.mocky.io/v3/"
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
@@ -52,29 +65,5 @@ abstract class Modules {
 
             return retrofit.create(TicketsService::class.java)
         }
-
-//        @Provides
-//        @Singleton
-//        fun provideTicketOffersService(): TicketsService {
-//            val baseUrl = "https://run.mocky.io/v3/38b5205d-1a3d-4c2f-9d77-2f9d1ef01a4a"
-//            val retrofit = Retrofit.Builder()
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .baseUrl(baseUrl)
-//                .build()
-//
-//            return retrofit.create(TicketsService::class.java)
-//        }
-
-//        @Provides
-//        @Singleton
-//        fun provideTicketsService(): TicketsService {
-//            val baseUrl = "https://run.mocky.io/v3/c0464573-5a13-45c9-89f8-717436748b69"
-//            val retrofit = Retrofit.Builder()
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .baseUrl(baseUrl)
-//                .build()
-//
-//            return retrofit.create(TicketsService::class.java)
-//        }
     }
 }

@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
         navController = navHostFragment.navController
 
-        //navController = findNavController(R.id.fragment_container_view)
         binding.navMenu.setupWithNavController(navController)
 
         binding.navMenu.setOnItemSelectedListener { item ->

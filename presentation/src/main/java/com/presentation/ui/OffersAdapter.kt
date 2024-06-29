@@ -22,7 +22,7 @@ class OffersAdapter : ListAdapter<OffersDomainEntity, OffersAdapter.OffersViewHo
         fun bind(offers: OffersDomainEntity, imageResId: Int) {
             binding.title.text = offers.title
             binding.town.text = offers.town
-            binding.price.text = "от ${offers.price} ₽"
+            "от ${offers.price} ₽".also { binding.price.text = it }
             binding.image.setImageResource(imageResId)
         }
     }
