@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.domain.TicketsDomainEntity
+import com.presentation.R
 import com.presentation.databinding.AllTicketsItemBinding
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -30,7 +31,7 @@ class AllTicketsAdapter:  ListAdapter<TicketsDomainEntity, AllTicketsAdapter.All
 
             if (!offers.has_transfer) {
                 binding.transferTv.visibility = View.VISIBLE
-                binding.transferTv.text = "/ Без пересадок"
+                binding.transferTv.text = R.string.without_transfer.toString()
             } else {
                 binding.transferTv.visibility = View.GONE
             }

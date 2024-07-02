@@ -11,7 +11,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class CapFragment : Fragment(R.layout.cap_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
                 requireActivity()
                     .supportFragmentManager
@@ -19,6 +18,5 @@ class CapFragment : Fragment(R.layout.cap_fragment) {
                     .replace(R.id.fragment_container_view, OffersFragment())
                     .commit()
             }.isEnabled = true
-        }
     }
 }

@@ -27,9 +27,9 @@ data class TicketsDomainEntity (
         val airport: String
     )
 
-    data class Luggage(val has_luggage: Boolean) {
-        data class Price(val value: Int)
-    }
+    data class Luggage(
+        val has_luggage: Boolean
+    )
 
     data class HandLuggage(
         val has_hand_luggage: Boolean,

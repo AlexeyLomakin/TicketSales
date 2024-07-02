@@ -8,10 +8,10 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.view.View
-import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.presentation.R
@@ -38,16 +38,13 @@ class ChoosingCountryFragment: Fragment(R.layout.choosing_country_fragment) {
         viewModel.ticketsOffersData.observe(viewLifecycleOwner){ ticketsOffersData ->
             adapter.submitList(ticketsOffersData)
         }
+        viewBinding.ticketRecommendations.addOnScrollListener(ScrollListener())
         viewBinding.backBtn.setOnClickListener{
-            requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-                requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
                     requireActivity()
                         .supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.fragment_container_view, OffersFragment())
                         .commit()
-                }.isEnabled = true
-            }
         }
 
         viewBinding.btnSwap.setOnClickListener {
@@ -122,19 +119,29 @@ class ChoosingCountryFragment: Fragment(R.layout.choosing_country_fragment) {
             )
             datePickerDialog.show()
         }
-        val bundle = Bundle().apply {
-            putString("departure", viewBinding.departure.text.toString())
-            putString("arrival", viewBinding.arrival.text.toString())
-            putString("departureDate", viewBinding.departureDateBtn.text.toString())
-        }
+
 
         viewBinding.searchTicketsBtn.setOnClickListener {
+            val bundle = Bundle().apply {
+                putString("departure", viewBinding.departure.text.toString())
+                putString("arrival", viewBinding.arrival.text.toString())
+                putString("departureDate", viewBinding.departureDateBtn.text.toString())
+            }
+
             AllTicketsFragment().apply { arguments = bundle}
             requireActivity()
             .supportFragmentManager
             .beginTransaction()
             .replace(R.id.fragment_container_view, AllTicketsFragment())
             .commit()
+        }
+    }
+    inner class ScrollListener : RecyclerView.OnScrollListener() {
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+            if (!recyclerView.canScrollHorizontally(1)) {
+                viewModel.ticketsOffersData
+            }
         }
     }
 }

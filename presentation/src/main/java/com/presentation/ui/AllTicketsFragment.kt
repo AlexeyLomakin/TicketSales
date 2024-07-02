@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.presentation.R
@@ -30,7 +31,7 @@ class AllTicketsFragment: Fragment(R.layout.all_tickets_fragment) {
         super.onViewCreated(view, savedInstanceState)
 
         viewBinding.ticketsRv.adapter = adapter
-
+        viewBinding.ticketsRv.layoutManager = LinearLayoutManager(requireContext())
         arguments?.let { bundle ->
             val departure = bundle.getString("departure")
             val arrival = bundle.getString("arrival")
@@ -47,7 +48,7 @@ class AllTicketsFragment: Fragment(R.layout.all_tickets_fragment) {
             .commit()
         }
 
-        val spacingItemDecoration = SpacingItemDecoration(16)
+        val spacingItemDecoration = SpacingItemDecoration(6)
         viewBinding.ticketsRv.addItemDecoration(spacingItemDecoration)
 
         viewModel.ticketsData.observe(viewLifecycleOwner) { ticketsData ->

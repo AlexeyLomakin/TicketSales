@@ -12,13 +12,13 @@ import javax.inject.Inject
 class AirTicketsRepositoryImpl @Inject constructor(
     private val ticketsService: TicketsService,
     private val offersResponseMapper: Mapper<OffersResponse.Offer, OffersDomainEntity>,
-    private val ticketsMapper: Mapper<Tickets, TicketsDomainEntity>,
-    private val ticketsOffersResponseMapper: Mapper<TicketsOffers, TicketsOffersDomainEntity>
+    private val ticketsMapper: Mapper<TicketsResponse.Tickets, TicketsDomainEntity>,
+    private val ticketsOffersResponseMapper: Mapper<TicketsOffersResponse.TicketsOffer, TicketsOffersDomainEntity>
 ): AirTicketsRepository {
     override fun getAllTickets(): Flow<List<TicketsDomainEntity>> = flow {
-        val response: Response<List<Tickets>> = ticketsService.getAllTickets()
+        val response: Response<TicketsResponse> = ticketsService.getAllTickets()
         if (response.isSuccessful) {
-            val tickets = response.body() ?: emptyList()
+            val tickets = response.body()?.tickets ?: emptyList()
             val ticketsDomainEntities = tickets.map {
                 ticketsMapper.map(it)
             }
@@ -26,9 +26,9 @@ class AirTicketsRepositoryImpl @Inject constructor(
         }
     }
     override fun getAllTicketsOffers(): Flow<List<TicketsOffersDomainEntity>> = flow {
-        val response: Response<List<TicketsOffers>> = ticketsService.getAllTicketOffers()
+        val response: Response<TicketsOffersResponse> = ticketsService.getAllTicketOffers()
         if (response.isSuccessful) {
-            val tickets = response.body() ?: emptyList()
+            val tickets = response.body()?.tickets_offers ?: emptyList()
             val ticketsOffersEntities = tickets.map {
                 ticketsOffersResponseMapper.map(it)
             }
@@ -40,7 +40,9 @@ class AirTicketsRepositoryImpl @Inject constructor(
         val response: Response<OffersResponse> = ticketsService.getAllOffers()
         if (response.isSuccessful) {
             val offers = response.body()?.offers ?: emptyList()
-            val offersDomainEntities = offers.map { offersResponseMapper.map(it) }
+            val offersDomainEntities = offers.map {
+                offersResponseMapper.map(it)
+            }
             emit(offersDomainEntities)
         } else {
             throw Exception("Failed to fetch offers: ${response.errorBody()?.string()}")

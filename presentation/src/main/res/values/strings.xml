@@ -14,5 +14,5 @@
     <string name="istanbul_name">Стамбул</string>
     <string name="sochi_name">Сочи</string>
     <string name="phuket_name">Пхукет</string>
-
+    <string name="without_transfer">/ Без пересадок</string>
 </resources>

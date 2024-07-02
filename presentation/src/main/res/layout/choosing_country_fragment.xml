@@ -93,8 +93,8 @@
 
     <Button
         android:id="@+id/return_date_btn"
-        android:layout_width="89dp"
-        android:layout_height="33dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:backgroundTint="#2F3035"
         android:background="@drawable/round_corner"
         android:text="+ обратно"
@@ -109,8 +109,8 @@
 
     <Button
         android:id="@+id/departure_date_btn"
-        android:layout_width="89dp"
-        android:layout_height="33dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:backgroundTint="#2F3035"
         android:background="@drawable/round_corner"
         android:textColor="@color/white"
@@ -123,8 +123,8 @@
 
     <Button
         android:id="@+id/passengers_btn"
-        android:layout_width="89dp"
-        android:layout_height="33dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:backgroundTint="#2F3035"
         android:background="@drawable/round_corner"
         android:text="1,эконом"
@@ -139,8 +139,8 @@
 
     <Button
         android:id="@+id/btn_filters"
-        android:layout_width="89dp"
-        android:layout_height="33dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:backgroundTint="#2F3035"
         android:background="@drawable/round_corner"
         android:drawableLeft="@drawable/filter"
@@ -169,7 +169,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#3E3F43">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -211,6 +212,5 @@
         android:drawableLeft="@drawable/subscribe_icon"
         app:layout_constraintTop_toBottomOf="@id/search_tickets_btn"
         android:layout_marginTop="16dp"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
