@@ -161,16 +161,27 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp">
+    android:layout_marginEnd="16dp"
+    android:background="#3E3F43">
+
+    <TextView
+        android:id="@+id/direct_flights"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/white"
+        android:text="Прямые рейсы"
+        android:textSize="20sp"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="5dp"
         android:id="@+id/ticket_recommendations"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="#3E3F43">
+        app:layout_constraintTop_toBottomOf="@+id/direct_flights">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -180,7 +191,7 @@
         android:layout_height="wrap_content"
         android:text="Показать всё"
         android:textColor="@color/blue"
-        android:backgroundTint="#2F3035"
+        android:background="@android:color/transparent"
         app:layout_constraintTop_toBottomOf="@+id/ticket_recommendations"
         app:layout_constraintStart_toStartOf="@+id/recommendations_cs"
         app:layout_constraintEnd_toEndOf="@+id/recommendations_cs" />

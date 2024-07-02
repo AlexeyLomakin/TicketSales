@@ -1,5 +1,6 @@
 package com.presentation.ui
 
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +32,7 @@ class AllTicketsAdapter:  ListAdapter<TicketsDomainEntity, AllTicketsAdapter.All
 
             if (!offers.has_transfer) {
                 binding.transferTv.visibility = View.VISIBLE
-                binding.transferTv.text = R.string.without_transfer.toString()
+                binding.transferTv.text = itemView.context.getString(R.string.without_transfer)
             } else {
                 binding.transferTv.visibility = View.GONE
             }

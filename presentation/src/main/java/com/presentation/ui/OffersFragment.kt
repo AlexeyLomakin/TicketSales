@@ -1,5 +1,6 @@
 package com.presentation.ui
 
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.MotionEvent.ACTION_UP
 import android.view.View
@@ -26,22 +27,32 @@ class OffersFragment: Fragment(R.layout.fragment_offers){
 
         viewBinding.rvOffers.adapter = adapter
         viewBinding.rvOffers.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        val spacingItemDecoration = SpacingItemDecoration(25)
+        viewBinding.rvOffers.addItemDecoration(spacingItemDecoration)
         viewBinding.rvOffers.addOnScrollListener(ScrollListener())
         viewModel.offersData.observe(viewLifecycleOwner){ offersData ->
                 adapter.submitList(offersData)
         }
 
-        viewBinding.arrival.setOnTouchListener { v, event ->
-            if (event.action == ACTION_UP) {
-                val departureText = viewBinding.departure.text.toString()
-                val bottomSheetFragment = BottomSheetFragment.newInstance(departureText)
-                bottomSheetFragment.show(
-                    requireActivity().supportFragmentManager,
-                    BottomSheetFragment.TAG
-                )
-                v.performClick()
+        viewBinding.arrival.apply {
+            setOnTouchListener { v, event ->
+                if (event.action == ACTION_UP) {
+                    val departureText = viewBinding.departure.text.toString()
+                    val bottomSheetFragment = BottomSheetFragment.newInstance(departureText)
+                    bottomSheetFragment.show(
+                        requireActivity().supportFragmentManager,
+                        BottomSheetFragment.TAG
+                    )
+                    v.performClick()
+                }
+                false
             }
-            true
+        }
+    }
+
+    inner class SpacingItemDecoration(private val horizontalSpaceHeight: Int) : RecyclerView.ItemDecoration() {
+        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+            outRect.right = horizontalSpaceHeight
         }
     }
 

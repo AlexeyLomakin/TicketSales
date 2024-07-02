@@ -6,6 +6,7 @@ import android.text.Editable
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.core.os.bundleOf
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -46,84 +47,69 @@ class BottomSheetFragment : BottomSheetDialogFragment(R.layout.bottom_sheet_sear
         with(viewBinding) {
             departure.text = arguments?.getString(ARG_DEPARTURE) ?: ""
 
-            anywhereButton.setOnClickListener  {
+            anywhereButton.setOnClickListener {
                 arrival.text = Editable.Factory.getInstance().newEditable(getString(R.string.anywhere))
             }
 
-            difficultRouteButton.setOnClickListener  {
-                requireActivity()
-                    .supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.fragment_container_view, CapFragment())
-                    .addToBackStack(null)
-                    .commit()
-
-                dismiss()
+            difficultRouteButton.setOnClickListener {
+                navigateToCapFragment()
             }
 
-            weekendsButton.setOnClickListener  {
-                requireActivity()
-                    .supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.fragment_container_view, CapFragment())
-                    .addToBackStack(null)
-                    .commit()
-
-                dismiss()
+            weekendsButton.setOnClickListener {
+                navigateToCapFragment()
             }
 
-            hotTicketsButton.setOnClickListener  {
-                requireActivity()
-                    .supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.fragment_container_view, CapFragment())
-                    .addToBackStack(null)
-                    .commit()
-
-                dismiss()
+            hotTicketsButton.setOnClickListener {
+                navigateToCapFragment()
             }
 
             istanbulCard.setOnClickListener {
-                arrival.text = Editable.Factory.getInstance().newEditable(getString(R.string.istanbul_name))
-                requireActivity()
-                    .supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.fragment_container_view, ChoosingCountryFragment())
-                    .addToBackStack(null)
-                    .commit()
-
-                dismiss()
+                navigateToChoosingCountryFragment(getString(R.string.istanbul_name))
             }
 
             sochiCard.setOnClickListener {
-                arrival.text = Editable.Factory.getInstance().newEditable(getString(R.string.sochi_name))
-                requireActivity()
-                    .supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.fragment_container_view, ChoosingCountryFragment())
-                    .addToBackStack(null)
-                    .commit()
-
-                dismiss()
+                navigateToChoosingCountryFragment(getString(R.string.sochi_name))
             }
 
             phuketCard.setOnClickListener {
-                arrival.text = Editable.Factory.getInstance().newEditable(getString(R.string.phuket_name))
-                requireActivity()
-                    .supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.fragment_container_view, ChoosingCountryFragment())
-                    .addToBackStack(null)
-                    .commit()
-
-                dismiss()
+                navigateToChoosingCountryFragment(getString(R.string.phuket_name))
             }
         }
+    }
+
+    private fun navigateToCapFragment(){
+        requireActivity().
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.fragment_container_view, CapFragment())
+                    .commit()
+        dismiss()
+    }
+
+    private fun navigateToChoosingCountryFragment(arrivalText: String) {
+        val departureText = viewBinding.departure.text.toString()
+        parentFragmentManager.setFragmentResult(
+            REQUEST_KEY,
+            bundleOf(
+                BUNDLE_KEY_DEPARTURE to departureText,
+                BUNDLE_KEY_ARRIVAL to arrivalText
+            )
+        )
+        requireActivity()
+            .supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_container_view, ChoosingCountryFragment())
+            .addToBackStack(null)
+            .commit()
+        dismiss()
     }
 
     companion object {
         const val TAG = "BottomSheetFragment"
         private const val ARG_DEPARTURE = "departure"
+        const val REQUEST_KEY = "BottomSheetFragment:Request"
+        const val BUNDLE_KEY_DEPARTURE = "departure"
+        const val BUNDLE_KEY_ARRIVAL = "arrival"
 
         fun newInstance(departure: String): BottomSheetFragment {
             val args = Bundle().apply {
@@ -135,4 +121,3 @@ class BottomSheetFragment : BottomSheetDialogFragment(R.layout.bottom_sheet_sear
         }
     }
 }
-

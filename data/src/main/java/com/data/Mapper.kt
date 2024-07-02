@@ -51,7 +51,9 @@ class TicketsMapper @Inject constructor() : Mapper<TicketsResponse.Tickets, Tick
             ),
             has_transfer = input.has_transfer,
             has_visa_transfer = input.has_visa_transfer,
-            luggage = TicketsDomainEntity.Luggage(input.luggage.has_luggage),
+            luggage = TicketsDomainEntity.Luggage(
+               input.luggage.has_luggage
+            ),
             hand_luggage = TicketsDomainEntity.HandLuggage(
                 has_hand_luggage = input.hand_luggage.has_hand_luggage,
                 size = input.hand_luggage.size

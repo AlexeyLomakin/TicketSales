@@ -20,7 +20,6 @@ class AllTicketsFragment: Fragment(R.layout.all_tickets_fragment) {
     private val adapter = AllTicketsAdapter()
     private val viewModel : AllTicketsViewModel by viewModels()
 
-
     inner class SpacingItemDecoration(private val verticalSpaceHeight: Int) : RecyclerView.ItemDecoration() {
         override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
             outRect.bottom = verticalSpaceHeight
@@ -32,6 +31,7 @@ class AllTicketsFragment: Fragment(R.layout.all_tickets_fragment) {
 
         viewBinding.ticketsRv.adapter = adapter
         viewBinding.ticketsRv.layoutManager = LinearLayoutManager(requireContext())
+
         arguments?.let { bundle ->
             val departure = bundle.getString("departure")
             val arrival = bundle.getString("arrival")
@@ -42,13 +42,13 @@ class AllTicketsFragment: Fragment(R.layout.all_tickets_fragment) {
 
         viewBinding.backBtn.setOnClickListener {
             requireActivity()
-            .supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragment_container_view, ChoosingCountryFragment())
-            .commit()
+                .supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container_view, ChoosingCountryFragment())
+                .commit()
         }
 
-        val spacingItemDecoration = SpacingItemDecoration(6)
+        val spacingItemDecoration = SpacingItemDecoration(8)
         viewBinding.ticketsRv.addItemDecoration(spacingItemDecoration)
 
         viewModel.ticketsData.observe(viewLifecycleOwner) { ticketsData ->
