@@ -5,7 +5,7 @@ import com.domain.TicketsDomainEntity
 import com.domain.TicketsOffersDomainEntity
 import javax.inject.Inject
 
-interface Mapper<I, O> {
+interface Mapper<I,O> {
     fun map(input: I): O
 }
 
@@ -20,8 +20,8 @@ class OffersMapper  @Inject constructor()  : Mapper<OffersResponse.Offer, Offers
     }
 }
 
-class TicketOffersMapper   @Inject constructor()   : Mapper<TicketsOffers, TicketsOffersDomainEntity>   {
-    override fun map(input: TicketsOffers): TicketsOffersDomainEntity   {
+class TicketOffersMapper   @Inject constructor()   : Mapper<TicketsOffersResponse.TicketsOffer, TicketsOffersDomainEntity>   {
+    override fun map(input: TicketsOffersResponse.TicketsOffer): TicketsOffersDomainEntity   {
         return TicketsOffersDomainEntity(
             id = input.id,
             title = input.title,
@@ -31,8 +31,8 @@ class TicketOffersMapper   @Inject constructor()   : Mapper<TicketsOffers, Ticke
     }
 }
 
-class TicketsMapper @Inject constructor() : Mapper<Tickets, TicketsDomainEntity> {
-    override fun map(input: Tickets): TicketsDomainEntity {
+class TicketsMapper @Inject constructor() : Mapper<TicketsResponse.Tickets, TicketsDomainEntity> {
+    override fun map(input: TicketsResponse.Tickets): TicketsDomainEntity {
         return TicketsDomainEntity(
             id = input.id,
             badge = input.badge,
@@ -51,7 +51,9 @@ class TicketsMapper @Inject constructor() : Mapper<Tickets, TicketsDomainEntity>
             ),
             has_transfer = input.has_transfer,
             has_visa_transfer = input.has_visa_transfer,
-            luggage = TicketsDomainEntity.Luggage(input.luggage.has_luggage),
+            luggage = TicketsDomainEntity.Luggage(
+               input.luggage.has_luggage
+            ),
             hand_luggage = TicketsDomainEntity.HandLuggage(
                 has_hand_luggage = input.hand_luggage.has_hand_luggage,
                 size = input.hand_luggage.size

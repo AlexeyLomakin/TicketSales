@@ -2,12 +2,12 @@ package com.airtickets
 
 import com.data.AirTicketsRepositoryImpl
 import com.data.Mapper
-import com.data.OffersResponse
 import com.data.OffersMapper
+import com.data.OffersResponse
 import com.data.TicketOffersMapper
-import com.data.Tickets
 import com.data.TicketsMapper
-import com.data.TicketsOffers
+import com.data.TicketsOffersResponse
+import com.data.TicketsResponse
 import com.data.TicketsService
 import com.domain.AirTicketsRepository
 import com.domain.GetAllOffersUseCase
@@ -36,10 +36,10 @@ abstract class Modules {
     abstract fun bindOffersMapper(offersMapper: OffersMapper): Mapper<OffersResponse.Offer, OffersDomainEntity>
 
     @Binds
-    abstract fun bindTicketsMapper(ticketsMapper: TicketsMapper): Mapper<Tickets, TicketsDomainEntity>
+    abstract fun bindTicketsMapper(ticketsMapper: TicketsMapper): Mapper<TicketsResponse.Tickets, TicketsDomainEntity>
 
     @Binds
-    abstract fun bindTicketsOffersMapper(ticketOffersMapper: TicketOffersMapper): Mapper<TicketsOffers, TicketsOffersDomainEntity>
+    abstract fun bindTicketsOffersMapper(ticketOffersMapper: TicketOffersMapper): Mapper<TicketsOffersResponse.TicketsOffer, TicketsOffersDomainEntity>
 
     @Binds
     abstract fun bindAirTicketsOffersRepository(getAllOffers: AirTicketsRepositoryImpl): AirTicketsRepository

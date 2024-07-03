@@ -8,10 +8,10 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.view.View
-import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.presentation.R
@@ -22,11 +22,25 @@ import java.util.Locale
 
 
 @AndroidEntryPoint
-class ChoosingCountryFragment: Fragment(R.layout.choosing_country_fragment) {
+class ChoosingCountryFragment : Fragment(R.layout.choosing_country_fragment) {
 
     private val viewBinding by viewBinding(ChoosingCountryFragmentBinding::bind)
     private val adapter = ChoosingCountryAdapter()
-    private val viewModel : ChoosingCountryViewModel by viewModels()
+    private val viewModel: ChoosingCountryViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        parentFragmentManager.setFragmentResultListener(
+            BottomSheetFragment.REQUEST_KEY,
+            this
+        ) { _, bundle ->
+            val departure = bundle.getString(BottomSheetFragment.BUNDLE_KEY_DEPARTURE)
+            val arrival = bundle.getString(BottomSheetFragment.BUNDLE_KEY_ARRIVAL)
+            viewBinding.departure.text = departure
+            viewBinding.arrival.text = Editable.Factory.getInstance().newEditable(arrival)
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,20 +48,17 @@ class ChoosingCountryFragment: Fragment(R.layout.choosing_country_fragment) {
         viewBinding.ticketRecommendations.layoutManager = LinearLayoutManager(requireContext())
         val divider = MaterialDividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
         viewBinding.ticketRecommendations.addItemDecoration(divider)
-        viewBinding.ticketRecommendations.adapter  = adapter
-        viewModel.ticketsOffersData.observe(viewLifecycleOwner){ ticketsOffersData ->
+        viewBinding.ticketRecommendations.adapter = adapter
+        viewModel.ticketsOffersData.observe(viewLifecycleOwner) { ticketsOffersData ->
             adapter.submitList(ticketsOffersData)
         }
-        viewBinding.backBtn.setOnClickListener{
-            requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-                requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-                    requireActivity()
-                        .supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.fragment_container_view, OffersFragment())
-                        .commit()
-                }.isEnabled = true
-            }
+        viewBinding.ticketRecommendations.addOnScrollListener(ScrollListener())
+        viewBinding.backBtn.setOnClickListener {
+            requireActivity()
+                .supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container_view, OffersFragment())
+                .commit()
         }
 
         viewBinding.btnSwap.setOnClickListener {
@@ -58,7 +69,6 @@ class ChoosingCountryFragment: Fragment(R.layout.choosing_country_fragment) {
                 .newEditable(viewBinding.departure.text)
             viewBinding.departure.text = arrivalText
         }
-
 
         val calendar = java.util.Calendar.getInstance()
         val dateFormat = SimpleDateFormat("d MMM", Locale("ru"))
@@ -122,19 +132,33 @@ class ChoosingCountryFragment: Fragment(R.layout.choosing_country_fragment) {
             )
             datePickerDialog.show()
         }
-        val bundle = Bundle().apply {
-            putString("departure", viewBinding.departure.text.toString())
-            putString("arrival", viewBinding.arrival.text.toString())
-            putString("departureDate", viewBinding.departureDateBtn.text.toString())
-        }
 
         viewBinding.searchTicketsBtn.setOnClickListener {
-            AllTicketsFragment().apply { arguments = bundle}
+            val bundle = Bundle().apply {
+                putString("departure", viewBinding.departure.text.toString())
+                putString("arrival", viewBinding.arrival.text.toString())
+                putString("departureDate", viewBinding.departureDateBtn.text.toString())
+            }
+
+            val fragment = AllTicketsFragment().apply {
+                arguments = bundle
+            }
+
             requireActivity()
-            .supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragment_container_view, AllTicketsFragment())
-            .commit()
+                .supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container_view, fragment)
+                .addToBackStack(null)
+                .commit()
+        }
+    }
+
+    inner class ScrollListener : RecyclerView.OnScrollListener() {
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+            if (!recyclerView.canScrollHorizontally(1)) {
+                viewModel.ticketsOffersData
+            }
         }
     }
 }
